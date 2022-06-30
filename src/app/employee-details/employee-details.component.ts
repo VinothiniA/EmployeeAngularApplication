@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-
+@Input() 
   id: number;
   employee: Employee;
 
@@ -19,9 +19,29 @@ export class EmployeeDetailsComponent implements OnInit {
     private employeeService: EmployeeService) { }
 
   ngOnInit() {
-    this.employee = new Employee();
+  //  this.employee = new Employee();
 
-    this.id = this.route.snapshot.params['id'];
+    this.getEmployee (this.route.snapshot.params['id']);
+  }
+
+  getEmployee(id: number): void {
+    this.employeeService.getEmployee(id)
+      .subscribe({
+        next: (data) => {
+          this.employee = data;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  updateEmployee() {
+    console.log(this.route.snapshot.params['id']);
+    console.log(this.employee);
+    this.employeeService.updateEmployee(this.route.snapshot.params['id'], this.employee)
+      .subscribe(data => console.log(data), error => console.log(error));
+    this.employee = new Employee();
+    this.list();
   }
 
   list(){

@@ -3,16 +3,20 @@
 <hr/>
 <div *ngIf="employee">
   <div>
-    <label><b>First Name: </b></label> {{employee.firstName}}
+    <label><b>First Name: </b></label> 
+    <input type="text" class="form-control" id="firstName" required [(ngModel)]="employee.firstName" name="firstName">
   </div>
   <div>
-    <label><b>Last Name: </b></label> {{employee.lastName}}
+    <label><b>Last Name: </b></label> 
+    <input type="text" class="form-control" id="lastName" required [(ngModel)]="employee.lastName" name="lastName">
   </div>
   <div>
-    <label><b>Email Id: </b></label> {{employee.emailId}}
+    <label><b>Email Id: </b></label> 
+    <input type="text" class="form-control" id="emailId" required [(ngModel)]="employee.emailId" name="emailId">
   </div>  
 </div>
 
 <br>
 <br>
+<button (click)="updateEmployee()" class="btn btn-info" style="margin-left: 10px">Update</button>
 <button (click)="list()" class="btn btn-primary">Back to Employee List</button><br>
